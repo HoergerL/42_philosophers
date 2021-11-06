@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:08:36 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/06 17:16:31 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/06 17:33:37 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ void protected_printf(t_data *data_philo, int mode)
 	else if (mode == EATING)
 		printf("%-10lu philosopher %i is eating\n", data_philo->total_time, data_philo->number_philo);
 	pthread_mutex_unlock(data_philo->mutex_print);
+}
+
+int	counter_start(t_data *data)
+{
+	static int	cnt = 0;
+	if (data->number_philo != 1)
+		cnt++;
+	return (cnt);
 }
 void sleep_thread(int time_to_sleep, t_data *data_philo)
 {
@@ -150,6 +158,15 @@ void	*philo_daily_work(void *arg)
 	data_philo = (t_data*) arg;
 	i = 1;
 	//print_data(data_philo);
+	counter_start(data_philo);
+	if(data_philo->number_philo == 1)
+	{
+		while (1)
+		{
+			if (counter_start(data_philo) == data_philo->number_philo_total - 1)
+				break;
+		}
+	}
 	while (data_philo->start_time_first == 0)
 	{
 		get_start_time_first(data_philo);
