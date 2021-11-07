@@ -6,11 +6,22 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:08:36 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 17:49:53 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:43:52 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	kill_util(t_data **data, int i)
+{
+	protected_printf(data[i], DEAD);
+	i = 0;
+	while (i < data[0]->number_philo_total)
+	{
+		data[i]->dead = 1;
+		i++;
+	}
+}
 
 void	kill_philos(t_data **data)
 {
@@ -24,17 +35,11 @@ void	kill_philos(t_data **data)
 		gettimeofday(&tv, NULL);
 		current_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 		if (data[i]->finished == 1)
-			break;
+			break ;
 		if (current_time - data[i]->last_eat
 			> (unsigned long) data[0]->time_to_die && data[i]->finished != 1)
 		{
-			protected_printf(data[i], DEAD);
-			i = 0;
-			while (i < data[0]->number_philo_total)
-			{
-				data[i]->dead = 1;
-				i++;
-			}
+			kill_util(data, i);
 			break ;
 		}
 		i++;

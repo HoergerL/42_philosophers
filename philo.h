@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:45:22 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 16:56:49 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:40:14 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_data
 	pthread_mutex_t	*fork_right;
 	pthread_mutex_t	**total_mutexes;
 	pthread_mutex_t	*mutex_print;
+	pthread_mutex_t	*cnt_mutex;
 }					t_data;
 
 //input_check
@@ -86,6 +87,11 @@ int		counter_start(t_data *data);
 void	sleep_thread(int time_to_sleep, t_data *data_philo);
 void	calculate_start_time(t_data *data_philo);
 int		get_start_time_first(t_data *data_philo, int stalker);
+
+//free
+void	free_mutexes(t_data *data);
+void	free_data_philo(t_data *global_data, t_data **data);
+void	free_data(t_data *global_data, t_data **data_philo, pthread_t *th);
 
 void	calculate_start_time(t_data *data_philo);
 void	*philo_daily_work(void *arg);

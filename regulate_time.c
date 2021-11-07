@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:41:42 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 16:44:47 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 18:29:12 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ int	counter_start(t_data *data)
 	static int	cnt = 0;
 
 	if (data->number_philo != 1)
+	{
+		pthread_mutex_lock(data->mutex_print);
 		cnt++;
+		pthread_mutex_unlock(data->mutex_print);
+	}
 	return (cnt);
 }
 
@@ -61,7 +65,9 @@ int	get_start_time_first(t_data *data_philo, int stalker)
 	{
 		data_philo->last_eat = start_time_first;
 		data_philo->start_time_first = start_time_first;
+		pthread_mutex_lock(data_philo->mutex_print);
 		cnt++;
+		pthread_mutex_unlock(data_philo->mutex_print);
 	}
 	return (cnt);
 }

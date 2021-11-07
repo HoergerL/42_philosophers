@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
-FILES = input_check.c main.c libft_utils.c put_number.c prints.c create_threads.c eat.c daily_work.c regulate_time.c
+FILES = input_check.c main.c libft_utils.c put_number.c prints.c create_threads.c eat.c daily_work.c regulate_time.c free.c
 
 OBJ = $(FILES:.c=.o)
 
