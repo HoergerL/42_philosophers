@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:45:22 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/06 15:49:27 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:07:08 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define EATING		1
 # define SLEEPING	2
 # define THINKING	3
+# define DEAD		4
 
 
 
@@ -61,4 +62,17 @@ size_t	ft_strlen(const char *s);
 int	ft_isdigit(int c);
 void	ft_putnbr(int n);
 
+//prints
+void	print_data(t_data *data);
+void protected_printf(t_data *data_philo, int mode);
+
+//create_threads.c
+t_data	*copy_global_data(t_data *global_data, int i);
+void	init_mutexes(t_data *data);
+int	create_philos(t_data *global_data);
+
+
+void	calculate_start_time(t_data *data_philo);
+void	*philo_daily_work(void *arg);
+void	*stalk_philos(void *arg);
 #endif
