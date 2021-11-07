@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 11:00:20 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 13:06:16 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:07:15 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,44 @@
 void	print_data(t_data *data)
 {
 	printf("data:\nnumber_philo : %i\n"
-	"number_philo_total : %i\n"
-	"time_to_die: %i\n"
-	"time_to_eat: %i\n"
-	"time_to_sleep: %i\n"
-	"number meals: %i\n\n\n", 
-	data->number_philo, 
-	data->number_philo_total, 
-	data->time_to_die, 
-	data->time_to_eat, 
-	data->time_to_sleep, 
-	data->number_meals);
+		"number_philo_total : %i\n"
+		"time_to_die: %i\n"
+		"time_to_eat: %i\n"
+		"time_to_sleep: %i\n"
+		"number meals: %i\n\n\n",
+		data->number_philo,
+		data->number_philo_total,
+		data->time_to_die,
+		data->time_to_eat,
+		data->time_to_sleep,
+		data->number_meals);
 }
 
-void protected_printf(t_data *data_philo, int mode)
+void	protected_printf(t_data *phi, int mode)
 {
-	static int print = 1;
-	//printf("dead%i nr %i\n", data_philo->dead, data_philo->number_philo);
-	
-	pthread_mutex_lock(data_philo->mutex_print);
-	if (data_philo->dead != 0 || print != 1)
+	static int	print = 1;
+
+	pthread_mutex_lock(phi->mutex_print);
+	if (phi->dead != 0 || print != 1)
 	{
-		pthread_mutex_unlock(data_philo->mutex_print);
+		pthread_mutex_unlock(phi->mutex_print);
 		return ;
 	}
-	calculate_start_time(data_philo);
+	calculate_start_time(phi);
 	if (mode == TAKE_FORK)
-		printf("%-10lu %i has taken a fork\n", data_philo->total_time, data_philo->number_philo);
+		printf("%-10lu %i has taken a fork\n", phi->total_time,
+			phi->number_philo);
 	else if (mode == EATING)
-		printf("%-10lu %i is eating\n", data_philo->total_time, data_philo->number_philo);
+		printf("%-10lu %i is eating\n", phi->total_time,
+			phi->number_philo);
 	else if (mode == SLEEPING)
-		printf("%-10lu %i is sleeping\n", data_philo->total_time, data_philo->number_philo);
+		printf("%-10lu %i is sleeping\n", phi->total_time, phi->number_philo);
 	else if (mode == THINKING)
-		printf("%-10lu %i is thinking\n", data_philo->total_time, data_philo->number_philo);
+		printf("%-10lu %i is thinking\n", phi->total_time, phi->number_philo);
 	else if (mode == DEAD)
 	{
-		printf("%-10lu %i died\n", data_philo->total_time, data_philo->number_philo);
+		printf("%-10lu %i died\n", phi->total_time, phi->number_philo);
 		print = 0;
 	}
-	pthread_mutex_unlock(data_philo->mutex_print);
+	pthread_mutex_unlock(phi->mutex_print);
 }

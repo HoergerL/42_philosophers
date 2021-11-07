@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 11:57:27 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/10/27 17:09:02 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:38:40 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,18 @@ int	ft_atoi(const char *str)
 	minus = check_minus(str, len);
 	nb = print_numb(str);
 	return (minus * nb);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned int		c;
+	unsigned char		*t;
+
+	c = 0;
+	t = (unsigned char *)s;
+	while (n > c)
+	{
+		t[c] = '\0';
+		c++;
+	}
 }

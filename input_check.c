@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:25:10 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/06 17:06:43 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:51:52 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,12 @@ void	get_input(int argc, char *argv[], t_data *data)
 		data->number_meals = INT_MAX;
 }
 
-int	input_check(int argc, char *argv[], t_data *data)
+int	check_digit(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
 	i = 1;
-	if (!(argc == 5 || argc == 6))
-	{
-		printf("wrong number of arguments\n");
-		return (1);
-	}
 	while (i < argc)
 	{
 		j = 0;
@@ -70,11 +65,22 @@ int	input_check(int argc, char *argv[], t_data *data)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	input_check(int argc, char *argv[], t_data *data)
+{
+	if (!(argc == 5 || argc == 6))
+	{
+		printf("wrong number of arguments\n");
+		return (1);
+	}
+	if (check_digit(argc, argv) == 1)
+		return (1);
 	get_input(argc, argv, data);
-	if (data->number_philo_total < 1 || data->time_to_die < 0 || data->time_to_eat < 0
-		|| data->time_to_sleep < 0 || data->number_philo_total > 250 || data->number_meals < 0)
-	//if (data->time_to_die < 0 || data->time_to_eat < 0 || data->time_to_sleep < 0 
-	//		|| data->number_philo_total > 250 || data->number_meals < 0)
+	if (data->number_philo_total < 1 || data->time_to_die < 0
+		|| data->time_to_eat < 0 || data->time_to_sleep < 0
+		|| data->number_philo_total > 250 || data->number_meals < 0)
 	{
 		printf("too less philos\n");
 		return (1);
