@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:08:36 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 15:45:36 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/07 15:47:58 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	philo_eat(t_data *data_philo)
 		pthread_mutex_lock(data_philo->fork_right);
 		//calculate_start_time(data_philo);
 		protected_printf(data_philo, TAKE_FORK);
+		data_philo->last_eat = data_philo->start_time;
 		protected_printf(data_philo, EATING);
 		//sleep solange es soll
 		sleep_thread(data_philo->time_to_eat, data_philo);
 		//usleep(500);
 		//printf("prev last eat: %lu now last_eat: %lu\n, diff: %lu", data_philo->last_eat, data_philo->start_time + data_philo->time_to_eat, data_philo->start_time + data_philo->time_to_eat - data_philo->last_eat);
-		data_philo->last_eat = data_philo->start_time + data_philo->time_to_eat;
+		
 		//printf("#################last eat changed to: %lu nr: %i\n", data_philo->last_eat, data_philo->number_philo);
 		pthread_mutex_unlock(data_philo->fork_right);
 		pthread_mutex_unlock(data_philo->fork_left);
@@ -70,11 +71,13 @@ void	philo_eat(t_data *data_philo)
 		//calculate_start_time(data_philo);
 		protected_printf(data_philo, TAKE_FORK);
 		//calculate_start_time(data_philo);
+		data_philo->last_eat = data_philo->start_time;
 		protected_printf(data_philo, EATING);
 		//sleep solange es soll
+		
 		sleep_thread(data_philo->time_to_eat, data_philo);
 		//printf("prev last eat: %lu now last_eat: %lu\n, diff: %lu", data_philo->last_eat, data_philo->start_time + data_philo->time_to_eat, data_philo->start_time + data_philo->time_to_eat - data_philo->last_eat);
-		data_philo->last_eat = data_philo->start_time + data_philo->time_to_eat;
+		
 		//printf("#################last eat changed to: %lu nr: %i\n", data_philo->last_eat, data_philo->number_philo);
 		//usleep(500);
 		pthread_mutex_unlock(data_philo->fork_left);
