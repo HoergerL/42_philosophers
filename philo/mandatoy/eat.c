@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:23:18 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 16:24:40 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:40:49 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	grep_fork(int side, t_data *data_philo)
 
 void	eat(t_data *data_philo)
 {
+	calculate_start_time_i(data_philo);
 	data_philo->last_eat = data_philo->start_time;
 	protected_printf(data_philo, EATING);
 	sleep_thread(data_philo->time_to_eat, data_philo);

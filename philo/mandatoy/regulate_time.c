@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:41:42 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 18:29:12 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/11 09:56:47 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	sleep_thread(int time_to_sleep, t_data *data_philo)
 {
 	while (1)
 	{
+		if (data_philo->dead == 1)
+			break ;
 		usleep(100);
 		gettimeofday(&data_philo->end_tv, NULL);
 		data_philo->end_time = data_philo->end_tv.tv_sec * 1000
@@ -48,6 +50,13 @@ void	calculate_start_time(t_data *data_philo)
 		+ data_philo->start_tv.tv_usec / 1000;
 	data_philo->total_time = data_philo->start_time
 		- data_philo->start_time_first;
+}
+
+void	calculate_start_time_i(t_data *data_philo)
+{
+	gettimeofday(&data_philo->start_tv, NULL);
+	data_philo->start_time = data_philo->start_tv.tv_sec * 1000
+		+ data_philo->start_tv.tv_usec / 1000;
 }
 
 int	get_start_time_first(t_data *data_philo, int stalker)

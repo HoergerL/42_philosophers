@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:08:36 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 18:43:52 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/11 10:23:34 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,17 @@ void	kill_philos(t_data **data)
 	struct timeval	tv;
 	unsigned long	current_time;
 	int				i;
+	unsigned long	last_eat;
 
 	i = 0;
 	while (1)
 	{
-		gettimeofday(&tv, NULL);
-		current_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 		if (data[i]->finished == 1)
 			break ;
-		if (current_time - data[i]->last_eat
+		last_eat = data[i]->last_eat;
+		gettimeofday(&tv, NULL);
+		current_time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+		if (current_time - last_eat
 			> (unsigned long) data[0]->time_to_die && data[i]->finished != 1)
 		{
 			kill_util(data, i);

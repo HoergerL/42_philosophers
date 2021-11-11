@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 11:00:20 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 16:07:15 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:21:52 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ void	protected_printf(t_data *phi, int mode)
 	}
 	calculate_start_time(phi);
 	if (mode == TAKE_FORK)
-		printf("%-10lu %i has taken a fork\n", phi->total_time,
+		printf("%lu %i has taken a fork\n", phi->total_time,
 			phi->number_philo);
 	else if (mode == EATING)
-		printf("%-10lu %i is eating\n", phi->total_time,
+		printf("%lu %i is eating\n", phi->total_time,
 			phi->number_philo);
 	else if (mode == SLEEPING)
-		printf("%-10lu %i is sleeping\n", phi->total_time, phi->number_philo);
+		printf("%lu %i is sleeping\n", phi->total_time, phi->number_philo);
 	else if (mode == THINKING)
-		printf("%-10lu %i is thinking\n", phi->total_time, phi->number_philo);
+		printf("%lu %i is thinking\n", phi->total_time, phi->number_philo);
 	else if (mode == DEAD)
 	{
-		printf("%-10lu %i died\n", phi->total_time, phi->number_philo);
+		printf("%lu %i died\n", phi->total_time, phi->number_philo);
 		print = 0;
 	}
 	pthread_mutex_unlock(phi->mutex_print);

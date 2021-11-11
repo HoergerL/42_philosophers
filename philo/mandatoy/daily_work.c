@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:30:25 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 16:35:01 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/11 10:04:27 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ void	*philo_daily_work(void *arg)
 
 	i = 1;
 	data_philo = (t_data *) arg;
-	wait_for_others(data_philo);
-	if (catch_one_philo(data_philo, i))
+	if (make_philos_ready(data_philo, i) == 1)
 		return (arg);
 	while (i <= data_philo->number_meals)
 	{
@@ -80,7 +79,7 @@ void	*philo_daily_work(void *arg)
 			break ;
 		philo_sleep(data_philo);
 		philo_think(data_philo);
-		i++;
+		coordinate_philos(data_philo, &i);
 	}
 	return (arg);
 }

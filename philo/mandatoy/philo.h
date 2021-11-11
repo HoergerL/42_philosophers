@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:45:22 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 18:40:14 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/11 10:05:57 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,16 @@ void	wait_for_others(t_data *data_philo);
 void	*philo_daily_work(void *arg);
 int		catch_one_philo(t_data *data_philo, int i);
 
+//daily_work_utils
+void	coordinate_philos(t_data *data_philo, int *i);
+int		make_philos_ready(t_data *data_philo, int i);
+
 //regulate time
 int		counter_start(t_data *data);
 void	sleep_thread(int time_to_sleep, t_data *data_philo);
 void	calculate_start_time(t_data *data_philo);
 int		get_start_time_first(t_data *data_philo, int stalker);
+void	calculate_start_time_i(t_data *data_philo);
 
 //free
 void	free_mutexes(t_data *data);

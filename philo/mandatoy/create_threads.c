@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 11:02:08 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 18:39:26 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/11 10:30:07 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,3 +99,31 @@ int	create_philos(t_data *global_data)
 	free_data(global_data, data_philo, th);
 	return (0);
 }
+/*
+./philo 1 800 200 200
+die after 800 milliseconds
+./philo 2 420 200 200
+run for ever
+./philo 5 800 200 200
+run for ever
+./philo 5 800 200 200 7
+end after 7 meals_per_philo
+./philo 4 410 200 200
+run for ever
+./philo 4 310 200 100
+1 must die
+./philo 3 550 200 200
+1 must die
+./philo 30 550 200 200
+run for ever
+./philo 30 800 200 200 7
+end after 7 meals_per_philo
+./philo 99 620 200 200
+run for ever
+./philo 98 440 200 200
+run for ever
+./philo 198 440 200 200
+run for ever
+./philo 199 620 200 200
+run for ever
+*/
