@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:25:10 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/07 16:51:52 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:58:12 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ int	input_check(int argc, char *argv[], t_data *data)
 		|| data->time_to_eat < 0 || data->time_to_sleep < 0
 		|| data->number_philo_total > 250 || data->number_meals < 0)
 	{
-		printf("too less philos\n");
+		printf("wrong input\n");
 		return (1);
 	}
+	if (data->number_meals == INT_MAX)
+		data->number_meals = -1;
 	return (0);
 }

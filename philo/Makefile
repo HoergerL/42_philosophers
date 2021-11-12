@@ -6,7 +6,7 @@
 #    By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 10:12:55 by lhoerger          #+#    #+#              #
-#    Updated: 2021/11/12 08:37:51 by lhoerger         ###   ########.fr        #
+#    Updated: 2021/11/12 14:54:37 by lhoerger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,4 +31,4 @@ fclean: clean
 re: fclean all
 
 bonus:
-	cd ../bonus && make
+	cd ../philo_bonus && make

@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 11:02:08 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/11 10:30:07 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:55:42 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_data	*copy_global_data(t_data *global_data, int i)
 	t_data	*data_philo;
 
 	data_philo = malloc(sizeof(t_data));
+	if (!data_philo)
+		return (NULL);
 	ft_bzero(data_philo, sizeof(*data_philo));
 	data_philo->number_philo = i + 1;
 	data_philo->number_meals = global_data->number_meals;
@@ -32,19 +34,24 @@ t_data	*copy_global_data(t_data *global_data, int i)
 	return (data_philo);
 }
 
-void	init_mutexes(t_data *data)
+int	init_mutexes(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	data->total_mutexes = malloc(sizeof(pthread_mutex_t *)
 			* data->number_philo_total);
+	if (!data->total_mutexes)
+		return (1);
 	while (i < data->number_philo_total)
 	{
 		data->total_mutexes[i] = malloc(sizeof(pthread_mutex_t));
+		if (!data->total_mutexes[i])
+			return (1);
 		pthread_mutex_init((data->total_mutexes[i]), NULL);
 		i++;
 	}
+	return (0);
 }
 
 int	create_threads(t_data *global_data, t_data **data_philo,
@@ -56,6 +63,8 @@ int	create_threads(t_data *global_data, t_data **data_philo,
 	while (i < global_data->number_philo_total)
 	{
 		data_philo[i] = copy_global_data(global_data, i);
+		if (data_philo[i] == NULL)
+			return (1);
 		data_philo[i]->mutex_print = mutex_print;
 		if (pthread_create(&th[i], NULL, &philo_daily_work, data_philo[i]) != 0)
 		{
@@ -72,19 +81,10 @@ int	create_threads(t_data *global_data, t_data **data_philo,
 	return (0);
 }
 
-int	create_philos(t_data *global_data)
+int	join_philos(t_data *global_data, pthread_t *th)
 {
-	pthread_t				*th;
-	int						i;
-	t_data					**data_philo;
-	static pthread_mutex_t	mutex_print;
+	int	i;
 
-	pthread_mutex_init(&mutex_print, NULL);
-	data_philo = malloc(sizeof(t_data *) * global_data->number_philo_total);
-	ft_bzero(data_philo, sizeof(*data_philo));
-	th = malloc(sizeof(pthread_t) * global_data->number_philo_total + 1);
-	init_mutexes(global_data);
-	create_threads(global_data, data_philo, &mutex_print, th);
 	i = 0;
 	while (i < global_data->number_philo_total + 1)
 	{
@@ -95,6 +95,27 @@ int	create_philos(t_data *global_data)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	create_philos(t_data *global_data)
+{
+	pthread_t				*th;
+	t_data					**data_philo;
+	static pthread_mutex_t	mutex_print;
+
+	pthread_mutex_init(&mutex_print, NULL);
+	data_philo = malloc(sizeof(t_data *) * global_data->number_philo_total);
+	th = malloc(sizeof(pthread_t) * global_data->number_philo_total + 1);
+	if (!data_philo || !th)
+		return (1);
+	ft_bzero(data_philo, sizeof(*data_philo));
+	if (init_mutexes(global_data) == 1)
+		return (1);
+	if (create_threads(global_data, data_philo, &mutex_print, th) == 1)
+		return (1);
+	if (join_philos(global_data, th) == 1)
+		return (1);
 	pthread_mutex_destroy(&mutex_print);
 	free_data(global_data, data_philo, th);
 	return (0);

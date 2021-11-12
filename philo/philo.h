@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 17:45:22 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/11 10:05:57 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:11:34 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	protected_printf(t_data *data_philo, int mode);
 
 //create_threads.c
 t_data	*copy_global_data(t_data *global_data, int i);
-void	init_mutexes(t_data *data);
+int		init_mutexes(t_data *data);
 int		create_philos(t_data *global_data);
 
 //eat

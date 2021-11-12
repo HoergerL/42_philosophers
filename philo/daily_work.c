@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 16:30:25 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/11 10:04:27 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:23:48 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	*philo_daily_work(void *arg)
 	data_philo = (t_data *) arg;
 	if (make_philos_ready(data_philo, i) == 1)
 		return (arg);
-	while (i <= data_philo->number_meals)
+	while (i <= data_philo->number_meals || data_philo->number_meals == -1)
 	{
 		if (data_philo->dead != 0)
 			break ;

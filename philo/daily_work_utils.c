@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 10:04:39 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/11 10:04:47 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:24:06 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	coordinate_philos(t_data *data_philo, int *i)
 	if (data_philo->number_philo_total > 30)
 		usleep(650);
 	usleep(200);
-	*i = *i + 1;
+	if (data_philo->number_meals != -1)
+		*i = *i + 1;
 }
 
 int	make_philos_ready(t_data *data_philo, int i)
