@@ -6,7 +6,7 @@
 #    By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/11 10:12:55 by lhoerger          #+#    #+#              #
-#    Updated: 2021/11/12 08:37:51 by lhoerger         ###   ########.fr        #
+#    Updated: 2021/11/12 08:27:56 by lhoerger         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra 
 RM = rm -f
 
-FILES = input_check.c main.c libft_utils.c put_number.c prints.c create_threads.c eat.c daily_work.c regulate_time.c free.c daily_work_utils.c
+FILES = main_bonus.c input_check_bonus.c libft_utils_bonus.c regulate_time_bonus.c killer_bonus.c \
+	print_bonus.c daily_work_bonus.c
 
 OBJ = $(FILES:.c=.o)
 
@@ -30,5 +31,3 @@ fclean: clean
 
 re: fclean all
 
-bonus:
-	cd ../bonus && make
