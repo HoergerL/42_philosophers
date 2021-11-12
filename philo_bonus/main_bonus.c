@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:54:21 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/12 15:57:41 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:18:34 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ int	handle_processes(t_data *data)
 	}
 	if (waitpid(-1, 0, 0) != -1)
 	{
+		usleep(10000);
 		if (data->number_philo != 1)
-		{
-			usleep(10000);
 			kill(0, SIGINT);
-		}
 	}
 	return (0);
 }
