@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 08:20:43 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/12 08:21:45 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:13:45 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_usleep(int time_to_sleep)
 	start_time = time_tv.tv_sec * 1000 + time_tv.tv_usec / 1000;
 	while (1)
 	{
-		usleep(100);
+		usleep(1000);
 		gettimeofday(&time_tv, NULL);
 		time = time_tv.tv_sec * 1000 + time_tv.tv_usec / 1000;
 		if (time - start_time >= (unsigned long) time_to_sleep)

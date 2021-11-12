@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 14:54:21 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/12 08:54:29 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:57:41 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,23 @@ int	handle_processes(t_data *data)
 	{
 		data->number_philo = i + 1;
 		id = fork();
+		if (id < 0)
+			exit(1);
 		data->pid = id;
 		if (id == 0)
 		{
 			daily_work(data);
-			return (1);
+			exit(1);
 		}
 		i++;
 	}
 	if (waitpid(-1, 0, 0) != -1)
 	{
 		if (data->number_philo != 1)
+		{
+			usleep(10000);
 			kill(0, SIGINT);
+		}
 	}
 	return (0);
 }

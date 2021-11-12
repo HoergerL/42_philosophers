@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 08:27:22 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/12 08:29:39 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:14:37 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	philo_eat(t_data *data)
 {
+	struct timeval	time_tv;
+
 	sem_wait(data->forks);
 	protected_printf(data, TAKE_FORK);
 	sem_wait(data->forks);
 	protected_printf(data, TAKE_FORK);
+	gettimeofday(&time_tv, NULL);
+	data->last_eat = time_tv.tv_sec * 1000 + time_tv.tv_usec / 1000;
 	protected_printf(data, EATING);
 	create_killer(data);
 	ft_usleep(data->time_to_eat);

@@ -6,7 +6,7 @@
 /*   By: lhoerger <lhoerger@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 08:24:19 by lhoerger          #+#    #+#             */
-/*   Updated: 2021/11/12 10:40:33 by lhoerger         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:55:11 by lhoerger         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	create_killer(t_data *data)
 	pthread_t	th;
 
 	data->last_eat = data->start_time;
-	pthread_create(&th, NULL, &check_philo, (void *) data);
+	if (pthread_create(&th, NULL, &check_philo, (void *) data) != 0)
+	{
+		printf("Error while creating Thread\n");
+		exit(1);
+	}
 	pthread_detach(th);
 }
